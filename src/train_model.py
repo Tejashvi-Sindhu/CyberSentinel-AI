@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from src.demo_data import generate_demo_dataset
+from src.preprocessing import normalize_frame_columns
 
 def _clean_data(frame, label_column="Label"):
     df = frame.copy()
@@ -17,7 +18,7 @@ def _clean_data(frame, label_column="Label"):
     if labels is None:
         raise ValueError(f"Label column {label_column!r} was not found.")
     y = df[labels].astype(str).str.strip()
-    X = df.drop(columns=[labels]).apply(pd.to_numeric, errors="coerce")
+    X = normalize_frame_columns(df.drop(columns=[labels])).apply(pd.to_numeric, errors="coerce")
     X = X.replace([float("inf"),float("-inf")],float("nan"))
     keep = y.ne("") & y.notna()
     X,y = X.loc[keep],y.loc[keep]
