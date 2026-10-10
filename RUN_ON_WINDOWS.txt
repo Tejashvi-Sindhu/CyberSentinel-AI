@@ -1,0 +1,38 @@
+CYBERSENTINEL AI — WINDOWS / VS CODE QUICK START
+================================================
+
+Requirements
+- Windows 10/11
+- Python 3.11 recommended
+- VS Code with the Python extension
+
+1. Extract the ZIP archive and open the CyberSentinel-AI folder in VS Code.
+2. Open Terminal > New Terminal.
+3. Create a virtual environment:
+
+   py -3.11 -m venv .venv
+
+4. Install dependencies:
+
+   .\.venv\Scripts\python.exe -m pip install --upgrade pip
+   .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+
+5. Train the synthetic demo models:
+
+   .\.venv\Scripts\python.exe -m src.train_model --demo --mode both
+
+6. Launch the dashboard:
+
+   .\.venv\Scripts\python.exe -m streamlit run app.py
+
+7. Open the localhost URL printed by Streamlit, usually http://localhost:8501.
+
+8. Run tests:
+
+   .\.venv\Scripts\python.exe -m pytest
+
+Troubleshooting
+- Run commands from the folder that contains app.py.
+- If py -3.11 is unavailable, install Python 3.11 and reopen VS Code.
+- Do not upload .venv, .env, datasets, or generated model files to GitHub.
+- Demo metrics are based on synthetic data and are not real-world performance claims.
